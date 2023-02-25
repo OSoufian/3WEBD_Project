@@ -1,0 +1,13 @@
+body {
+  padding: 2% 5%;
+}
+
+#test {
+  background-color: green;
+}
+
+#artworkIcon {
+  width: 25%;
+  height: auto;
+  float: right;
+}
