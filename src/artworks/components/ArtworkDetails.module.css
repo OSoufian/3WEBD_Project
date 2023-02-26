@@ -1,13 +1,26 @@
-body {
-  padding: 2% 5%;
+header {
+  height: 80px;
+  background-color: #18549c;
 }
 
-#test {
-  background-color: green;
+#mainContainer {
+  padding-top: 2%;
+  padding-left: 3%;
+}
+
+#mainSection {
+  display: flex;
+  width: 90%;
+  margin: 0% auto;
+  padding-left: 1%;
+}
+
+h1 {
+  width: 30%;
 }
 
 #artworkIcon {
-  width: 25%;
+  width: 50%;
   height: auto;
-  float: right;
+  margin-left: 5%;
 }

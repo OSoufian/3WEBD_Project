@@ -7,7 +7,7 @@ import ArtworkListContainer from './artworks/components/ArtworkListContainer'
 function App() {
   return (
     <div>
-        <ArtworkDetails objectID={1002} />
+        <ArtworkDetails objectID={1000} />
         <p>Test</p>
         <ArtworkListContainer />
     </div>

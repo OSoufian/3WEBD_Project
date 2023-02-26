@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "./ArtworkDetails.module.css";
 
 import { ArtworkType } from "../../types";
+import { baseUrl } from "../config";
 
 type ArtworkDetailsProps = {
   objectID: number;
@@ -12,8 +13,6 @@ const ArtworkDetails: React.FunctionComponent<ArtworkDetailsProps> = (
   props
 ) => {
   const { objectID } = props;
-  const baseUrl =
-    "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
   const [artwork, setArtworkID] = useState<ArtworkType | null>(null);
 
   useEffect(() => {
@@ -26,22 +25,33 @@ const ArtworkDetails: React.FunctionComponent<ArtworkDetailsProps> = (
 
   return (
     <div>
-      {artwork ? (
-        <div>
-          <div id={styles.test}>
-            <h1> Artwork {artwork.objectID} : {artwork.title} </h1>
-            <img id={styles.artworkIcon} src={artwork.primaryImage} alt={artwork.title} />
-          </div>          
-          <p>
-            <b>Département :</b> {artwork.department}
-          </p>
-          <p>
-            <b>Année d'acquisition:</b> {artwork.accessionYear}
-          </p>
-        </div>
-      ) : (
-        <p>Artwork inexistant !</p>
-      )}
+      <header>
+      </header>    
+      <div id={styles.mainContainer}>
+        {artwork ? (
+          <div>
+            <div>
+              <p><a href="">Accueil</a> / <a href="">{artwork.department}</a></p>     
+            </div>
+            <div>
+              <div id={styles.mainSection}>
+                <div>
+                  <h1>{artwork.title}</h1>
+                  <a href="">{artwork.culture}</a>
+                  <p>{artwork.objectDate}</p>
+                  <p><svg xmlns="http://www.w3.org/2000/svg"></svg><b>Exposé au Met Fifth Avenue dans la Galerie <a href="">{artwork.GalleryNumber}</a></b></p>
+                </div>                
+                <img id={styles.artworkIcon} src={artwork.primaryImage} alt={artwork.title} />
+              </div>          
+              <p><b>Département :</b> {artwork.department}</p>
+              <p><b>Année d'acquisition:</b> {artwork.accessionYear}</p>
+            </div>
+          </div>
+          
+        ) : (
+          <p>Artwork inexistant !</p>
+        )}
+      </div>
     </div>
   );
 };

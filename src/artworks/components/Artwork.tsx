@@ -9,15 +9,15 @@ type ArtworkDetailsProps = {
   artwork: ArtworkType;
 };
 
-export default function ArtworkCard(props: ArtworkDetailsProps) {
+export default function Artwork(props: ArtworkDetailsProps) {
   const { artwork } = props;
   return (
     <Link to={`/Artworks/${artwork.objectID}`}>
       <div className={styles.card}>
-        <div>{artwork.objectName}</div>
+        <div>{artwork.title}</div>
         <img
           src={artwork.primaryImage}
-          alt={artwork.objectName}
+          alt={artwork.title}
           height={96}
           width={96}
         />
