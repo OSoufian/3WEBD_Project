@@ -39,12 +39,10 @@ const ArtworkDetails: React.FunctionComponent<ArtworkDetailsProps> = (
                   <h1>{artwork.title}</h1>
                   <a href="">{artwork.culture}</a>
                   <p>{artwork.objectDate}</p>
-                  <p><svg xmlns="http://www.w3.org/2000/svg"></svg><b>Exposé au Met Fifth Avenue dans la Galerie <a href="">{artwork.GalleryNumber}</a></b></p>
+                  <p><b>Exposé au Met Fifth Avenue dans la Galerie <a href="">{artwork.GalleryNumber}</a></b></p>
                 </div>                
                 <img id={styles.artworkIcon} src={artwork.primaryImage} alt={artwork.title} />
-              </div>          
-              <p><b>Département :</b> {artwork.department}</p>
-              <p><b>Année d'acquisition:</b> {artwork.accessionYear}</p>
+              </div>
             </div>
           </div>
           

@@ -68,13 +68,9 @@ function ArtworkListContainer() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`${baseUrl}`);
-      console.log("lol");
-      console.log(response);
-      const objectIDs = response.data.objectIDs;
-      console.log(objectIDs);
+      const objectIDs = response.data.objectIDs.slice(0,100);
       objectIDs.map(async (objectID: number) => {
         const response = await axios.get(`${baseUrl}/${objectID}`);
-        console.log(response);
         setArtworks((prevArtworks) => [...prevArtworks, response.data]);
       });
     };
@@ -82,6 +78,8 @@ function ArtworkListContainer() {
   }, []);
 
   console.log(artworks);
+
+
   return <ArtworkList Artworks={artworks} />;
 }
 
