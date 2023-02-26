@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { ArtworkType } from "../../types";
 
-import styles from "./ArtworkCard.module.css";
+import styles from "./Artwork.module.css";
 
 type ArtworkDetailsProps = {
   artwork: ArtworkType;
