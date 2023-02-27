@@ -6,11 +6,9 @@ import { ArtworkType } from "../../types";
 
 const baseUrl = "https://collectionapi.metmuseum.org";
 
-// {
-//     searchArtwork = "",
-//   }: { searchArtwork?: string } = {}
-
-export function useArtworkListQuery() {
+export function useArtworkListQuery({
+  searchArtwork = "",
+}: { searchArtwork?: string } = {}) {
   const [artworks, setArtworks] = useState<ArtworkType[]>([]);
   //   const [museums, setMuseums] = useState([]);
 

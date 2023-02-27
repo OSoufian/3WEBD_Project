@@ -8,9 +8,8 @@ import Artwork from "./Artwork";
 //   Artworks: ArtworkType[];
 // };
 
-const artworkList: ArtworkType[] = useArtworkListQuery();
-
 export function ArtworkList() {
+  const artworkList: ArtworkType[] = useArtworkListQuery();
   return (
     <div>
       <h1>Artworks</h1>
