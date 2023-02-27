@@ -1,21 +1,18 @@
 // import styles from "./ArtworkList.module.css";
-import { useArtworkListQuery } from "./queries";
 
 import { ArtworkType } from "../../types";
 import Artwork from "./Artwork";
 
-// type ArtworkListProps = {
-//   Artworks: ArtworkType[];
-// };
+type ArtworkListProps = {
+  Artworks: ArtworkType[];
+};
 
-const artworkList: ArtworkType[] = useArtworkListQuery();
-
-export function ArtworkList() {
+export function ArtworkList({ Artworks }: ArtworkListProps) {
   return (
     <div>
       <h1>Artworks</h1>
       <div>
-        {artworkList.map((artwork) => (
+        {Artworks.map((artwork) => (
           <Artwork artwork={artwork} />
         ))}
       </div>

@@ -12,16 +12,14 @@ type ArtworkDetailsProps = {
 export default function Artwork(props: ArtworkDetailsProps) {
   const { artwork } = props;
   return (
-    <Link to={`/Artworks/${artwork.objectID}`}>
-      <div className={styles.card}>
-        <div>{artwork.title}</div>
-        <img
-          src={artwork.primaryImage}
-          alt={artwork.title}
-          height={96}
-          width={96}
-        />
-      </div>
-    </Link>
+    <div className={styles.card}>
+      <div>{artwork.title}</div>
+      <img
+        src={artwork.primaryImage}
+        alt={artwork.title}
+        height={96}
+        width={96}
+      />
+    </div>
   );
 }

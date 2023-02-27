@@ -1,15 +1,16 @@
-import './App.css';
+import "./App.css";
 
+import ArtworkDetails from "./artworks/components/ArtworkDetails";
 
-import ArtworkDetails from './artworks/components/ArtworkDetails'
-import ArtworkListContainer from './artworks/components/ArtworkListContainer'
+import { useArtworkListQuery } from "./artworks/components/queries";
+import "./ArtworkListContainer.module.css";
+
+import { ArtworkList } from "./artworks/components/ArtworkList";
 
 function App() {
   return (
     <div>
-        <ArtworkDetails objectID={1000} />
-        <p>Test</p>
-        <ArtworkListContainer />
+      <ArtworkList Artworks={artworkList} />
     </div>
   );
 }

@@ -7,7 +7,12 @@ export type ArtworkType = {
   culture: string;
   objectDate: string;
   GalleryNumber: string;
-  // accessionNumber: string;  
+  geographyType: string;
+  country: string;
+  medium: string;
+  dimensions: string;
+  creditLine: string;
+  accessionNumber: string;  
   // primaryImageSmall: string;
   // additionalImages: string[];  
   // objectName: string;  
@@ -28,14 +33,9 @@ export type ArtworkType = {
   // artistWikidata_URL: string;
   // objectBeginDate: number;
   // objectEndDate: number;
-  // medium: string;
-  // dimensions: string;
-  // creditLine: string;
-  // geographyType: string;
   // city: string;
   // state: string;
   // county: string;
-  // country: string;
   // region: string;
   // subregion: string;
   // locale: string;
