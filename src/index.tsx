@@ -23,7 +23,7 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/details/:objectID",
+        path: "/artworks/:objectID",
         element: <ArtworkDetails />,
       },
       {

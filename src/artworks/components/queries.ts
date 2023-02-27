@@ -6,9 +6,9 @@ import { ArtworkType } from "../../types";
 
 const baseUrl = "https://collectionapi.metmuseum.org";
 
-export function useArtworkListQuery({
-  searchArtwork = "",
-}: { searchArtwork?: string } = {}) {
+export function useArtworkListQuery(
+  options: { searchText?: string; offset?: number; limit?: number } = {}
+) {
   const [artworks, setArtworks] = useState<ArtworkType[]>([]);
   //   const [museums, setMuseums] = useState([]);
 
@@ -17,7 +17,7 @@ export function useArtworkListQuery({
       const response = await axios.get(
         "https://collectionapi.metmuseum.org/public/collection/v1/objects"
       );
-      const objectIDs = response.data.objectIDs.slice(0, 100); // Get the first 20 object IDs
+      const objectIDs = response.data.objectIDs.slice(0, 9);
       const promises = objectIDs.map((objectID: number) => {
         return axios.get(
           `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`

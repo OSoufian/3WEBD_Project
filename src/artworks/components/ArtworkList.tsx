@@ -1,23 +1,44 @@
-// import styles from "./ArtworkList.module.css";
+import styles from "./ArtworkList.module.css";
 import { useArtworkListQuery } from "./queries";
 
 import { ArtworkType } from "../../types";
 import Artwork from "./Artwork";
 
-// type ArtworkListProps = {
-//   Artworks: ArtworkType[];
-// };
+import {useState} from "react";
 
-export function ArtworkList() {
+type ArtworkListProps = {
+  children: React.ReactNode;
+};
+
+// export default function ArtworkList({ children }: ArtworkListProps) {
+//   return <div className={styles.list}>{children}</div>;
+// }
+
+export default function ArtworkList() {
   const artworkList: ArtworkType[] = useArtworkListQuery();
+  const [query, setQuery] = useState("");
   return (
     <div>
-      <h1>Artworks</h1>
-      <div>
-        {artworkList.map((artwork) => (
-          <Artwork artwork={artwork} />
-        ))}
+        <input placeholder="Rechercher" onChange={event => setQuery(event.target.value)} />
+        <div className={styles["museum-list"]}>
+            {/* {artworkList.map((artwork) => (
+              <Artwork artwork={artwork} />
+            ))} */}
+            {
+              artworkList.filter(artworks => {
+                if (query === '') {
+                  return artworks;
+                } else if (artworks.title.toLowerCase().includes(query.toLowerCase())) {
+                  return artworks;
+                }
+              }).map((artwork, index) => (
+                <Artwork artwork={artwork} />
+            ))
+          }
       </div>
+
     </div>
   );
 }
+
+
