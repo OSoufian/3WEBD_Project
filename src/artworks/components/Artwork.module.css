@@ -21,6 +21,8 @@
     height: auto;
     object-fit: cover;
     margin-bottom: 1rem;
+    height: 400px;
+    width: 300px;
 }
 
 .museum-article h2 {

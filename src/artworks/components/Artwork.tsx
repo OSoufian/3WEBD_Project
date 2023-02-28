@@ -11,16 +11,17 @@ export default function Artwork(props: ArtworkDetailsProps) {
   const { artwork } = props;
   return (
       <div className={styles["museum-article"]}>
-        <object data="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png" type="image/png" height={250}>
+      
           <img
             src={artwork.primaryImage}
             alt={artwork.title}
-            className={styles["museum-article__image"]}
-          />      
-        </object>
+            onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+              e.currentTarget.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png";
+            }}       
+          />
         
-        <h2 className={styles["museum-article__title"]}>{artwork.title}</h2>
-        <Link to={`/artworks/${artwork.objectID}`} className={styles["museum-article__link"]}>
+        <h2>{artwork.title}</h2>
+        <Link to={`/artworks/${artwork.objectID}`}>
           View Details
         </Link>
       </div>

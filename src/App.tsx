@@ -13,15 +13,10 @@ import { ArtworkType } from "./types";
 function App() {
   const artworkList = useArtworkListQuery();
   return (
-    <div>
+    <div className={styles["main-container"]}>
       <h1>Artworks</h1>
-
       <div>
-        {/* <ArtworkList>
-          {artworkList.results.map((artwork) => (
-            <Artwork key={artwork.id} artwork={artwork} />
-          ))}{" "}
-        </ArtworkList> */}
+        <ArtworkList/>
       </div>
     </div>
   );

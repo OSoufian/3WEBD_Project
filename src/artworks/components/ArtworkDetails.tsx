@@ -49,18 +49,15 @@ export default function ArtworkDetails() {
                       <a href="">{artwork.GalleryNumber}</a>
                     </b>
                   </p>
-                </div>
-                <object
-                  data="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png"
-                  type="image/png"
-                  height={700}
-                >
+                </div>                
                   <img
                     id={styles.artworkIcon}
                     src={artwork.primaryImage}
                     alt={artwork.title}
+                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                      e.currentTarget.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png";
+                    }}   
                   />
-                </object>
               </div>
               <div id={styles.detailsSection}>
                 <h2>Artwork Details</h2>
@@ -83,10 +80,10 @@ export default function ArtworkDetails() {
                   <b>Dimensions :</b> {artwork.dimensions}
                 </p>
                 <p>
-                  <b>Référence : {artwork.creditLine}</b>
+                  <b>Référence :</b> {artwork.creditLine}
                 </p>
                 <p>
-                  <b>Numéro d'accès : {artwork.accessionNumber}</b>
+                  <b>Numéro d'accès :</b> {artwork.accessionNumber}
                 </p>
               </div>
             </div>

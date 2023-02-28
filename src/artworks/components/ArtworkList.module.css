@@ -1,7 +1,15 @@
+.search-input {
+  margin-left: 69.7vw !important;
+}
+
+.search-input input {
+  height: 10px;
+}
+
 .museum-list {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-between; */
+  /* padding-left: 2%; */
 }
 
 .pagination {
