@@ -16,7 +16,9 @@ export default function ArtworkDetails() {
 
   useEffect(() => {
     const fetchArtwork = async () => {
-      const response = await axios.get<ArtworkType>(`${baseUrl}/${objectID}`);
+      const response = await axios.get<ArtworkType>(
+        `${baseUrl}/public/collection/v1/objects/${objectID}`
+      );
       setArtworkID(response.data);
     };
     fetchArtwork();
@@ -48,7 +50,11 @@ export default function ArtworkDetails() {
                     </b>
                   </p>
                 </div>
-                <object data="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png" type="image/png" height={700}>
+                <object
+                  data="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png"
+                  type="image/png"
+                  height={700}
+                >
                   <img
                     id={styles.artworkIcon}
                     src={artwork.primaryImage}

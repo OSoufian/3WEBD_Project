@@ -16,7 +16,6 @@ export default function Artwork(props: ArtworkDetailsProps) {
             src={artwork.primaryImage}
             alt={artwork.title}
             className={styles["museum-article__image"]}
-            height={250}
           />      
         </object>
         

@@ -1,50 +1,88 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { baseUrl } from "../config";
 
 import { ArtworkType } from "../../types";
-
-const baseUrl = "https://collectionapi.metmuseum.org";
 
 export function useArtworkListQuery(
   options: { searchText?: string; offset?: number; limit?: number } = {}
 ) {
-  const [artworks, setArtworks] = useState<ArtworkType[]>([]);
-  //   const [museums, setMuseums] = useState([]);
+  const { searchText = "", limit = 9, offset = 0 } = options;
+  // const [artworks, setArtworks] = useState<ArtworkType[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  return useQuery(
+    ["artworks", { searchText, limit, offset }],
+    async () => {
+      console.log("Salut 0.75");
       const response = await axios.get(
-        "https://collectionapi.metmuseum.org/public/collection/v1/objects"
+        `${baseUrl}/public/collection/v1/search?q=${searchText}&offset=${offset}&limit=${limit}`
       );
-      const objectIDs = response.data.objectIDs.slice(0, 9);
+      const objectIDs = response.data.objectIDs;
+      console.log("Salut 1");
       const promises = objectIDs.map((objectID: number) => {
-        return axios.get(
-          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
-        );
+        return axios.get(`${baseUrl}/public/collection/v1/objects/${objectID}`);
       });
+      console.log("Salut 2");
       const artworks = await Promise.all(promises);
-      setArtworks(artworks.map((artwork) => artwork.data));
-
-      //   axios
-      //     .get(
-      //       "https://collectionapi.metmuseum.org/public/collection/v1/departments"
-      //     )
-      //     .then((response) => {
-      //       setMuseums(response.data.departments);
-      //     });
-    };
-    fetchData();
-  }, []);
-
-  return artworks;
+      console.log("Salut 3");
+      // setArtworks(artworks.map((artwork) => artwork.data));
+      const finalResponse: ArtworkType[] = artworks.map(
+        (artwork) => artwork.data
+      );
+      console.log("Salut 4");
+      console.log(finalResponse);
+      return {
+        previousOffset: offset > 0 ? offset - limit : null,
+        nextOffset: objectIDs.length === limit ? offset + limit : null,
+        results: finalResponse,
+      };
+    },
+    { enabled: Boolean(searchText), refetchOnWindowFocus: false }
+  );
 }
 
-export function useArtworkDetailsQuery(ArtworkId: number | null) {
-  return useQuery(["Artworks"], async () => {
-    const response = await fetch(`${baseUrl}/Artworks/${ArtworkId}`);
-    const json = await response.json();
+// export function useArtworkListQuery(
+//   options: { searchText?: string; offset?: number; limit?: number } = {}
+// ) {
+//   const [artworks, setArtworks] = useState<ArtworkType[]>([]);
+//   //   const [museums, setMuseums] = useState([]);
+//   const { searchText = "", limit = 9, offset = 0 } = options;
 
-    return json as ArtworkType;
-  });
-}
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const response = await axios.get(
+//         `https://collectionapi.metmuseum.org/public/collection/v1/search?title=${searchText}&offset=${offset}&limit=${limit}`
+//       );
+//       console.log(response.data);
+//       const objectIDs = response.data.objectIDs;
+//       const promises = objectIDs.map((objectID: number) => {
+//         return axios.get(
+//           `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
+//         );
+//       });
+//       const artworks = await Promise.all(promises);
+//       setArtworks(artworks.map((artwork) => artwork.data));
+
+//       //   axios
+//       //     .get(
+//       //       "https://collectionapi.metmuseum.org/public/collection/v1/departments"
+//       //     )
+//       //     .then((response) => {
+//       //       setMuseums(response.data.departments);
+//       //     });
+//     };
+//     fetchData();
+//   }, []);
+
+//   return artworks;
+// }
+
+// export function useArtworkDetailsQuery(ArtworkId: number | null) {
+//   return useQuery(["Artworks"], async () => {
+//     const response = await fetch(`${baseUrl}/Artworks/${ArtworkId}`);
+//     const json = await response.json();
+
+//     return json as ArtworkType;
+//   });
+// }

@@ -11,16 +11,19 @@ import Artwork from "./artworks/components/Artwork";
 import { ArtworkType } from "./types";
 
 function App() {
-  const artworkList: ArtworkType[] = useArtworkListQuery();
+  const artworkList = useArtworkListQuery();
   return (
-  <div >
-    <h1>Artworks</h1>
-    
     <div>
-      <ArtworkList />
-      
+      <h1>Artworks</h1>
+
+      <div>
+        {/* <ArtworkList>
+          {artworkList.results.map((artwork) => (
+            <Artwork key={artwork.id} artwork={artwork} />
+          ))}{" "}
+        </ArtworkList> */}
+      </div>
     </div>
-  </div>    
   );
 }
 

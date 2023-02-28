@@ -3,3 +3,23 @@
   flex-wrap: wrap;
   /* justify-content: space-between; */
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.pagination button {
+  background: none;
+  border: none;
+  color: #0077c0;
+  font-weight: bold;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination button:hover {
+  color: #005fa3;
+}

@@ -10,6 +10,7 @@ import App from "./App";
 import Root from "./Root";
 import * as rootModule from "./Root";
 import ArtworkDetails from "./artworks/components/ArtworkDetails";
+import ArtworkListPage from "./artworks/components/ArtworkListPage";
 
 console.log(rootModule);
 
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <App />,
+        element: <ArtworkListPage />,
       },
       {
         path: "/artworks/:objectID",
