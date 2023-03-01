@@ -23,7 +23,6 @@ export function NavBar() {
       }}
     >
       <Link to="/">Accueil</Link>
-      <Link to="/about">About</Link>
     </nav>
   );
 }

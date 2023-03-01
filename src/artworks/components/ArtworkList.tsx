@@ -1,5 +1,6 @@
 import styles from "./ArtworkList.module.css";
-import { useArtworkListQuery } from "./queries";
+import { useArtworkListQuery } from "../queries";
+import { useArtworkHighlightListQuery } from "../queries";
 
 import { ArtworkType } from "../../types";
 import Artwork from "./Artwork";
@@ -12,7 +13,8 @@ type ArtworkListProps = {
 };
 
 export default function ArtworkList() {
-  const artworkList = useArtworkListQuery();
+  // const artworkList = useArtworkListQuery();
+  const artworkList = useArtworkHighlightListQuery();
   const [input, setInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 

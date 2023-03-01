@@ -24,6 +24,11 @@ export default function ArtworkDetails() {
     fetchArtwork();
   }, [objectID]);
 
+  const getWikipediaLink = (title: string) => {
+    const wikipediaBaseUrl = "https://en.wikipedia.org/wiki/";
+    return `${wikipediaBaseUrl}${title.replace(/\s/g, "_")}`;
+  };
+  
   return (
     <div>
       <header>
@@ -85,6 +90,7 @@ export default function ArtworkDetails() {
                 <p>
                   <b>Numéro d'accès :</b> {artwork.accessionNumber}
                 </p>
+                <a href={getWikipediaLink(artwork.title)}>Wikipedia link for more details</a>
               </div>
             </div>
           </div>
