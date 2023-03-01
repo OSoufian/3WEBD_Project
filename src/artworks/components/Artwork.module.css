@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     flex-basis: calc(30% - 1rem);
-    /* width: calc(33.33% - 1rem); */
     padding: 1rem;
     box-sizing: border-box;
     border: 1px solid #ccc;

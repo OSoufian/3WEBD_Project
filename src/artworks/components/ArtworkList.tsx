@@ -1,19 +1,12 @@
 import styles from "./ArtworkList.module.css";
-import { useArtworkListQuery } from "../queries";
 import { useArtworkHighlightListQuery } from "../queries";
 
-import { ArtworkType } from "../../types";
 import Artwork from "./Artwork";
 
 import { useState } from "react";
 import { TextField } from "@mui/material";
 
-type ArtworkListProps = {
-  children: React.ReactNode;
-};
-
 export default function ArtworkList() {
-  // const artworkList = useArtworkListQuery();
   const artworkList = useArtworkHighlightListQuery();
   const [input, setInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,10 +37,6 @@ export default function ArtworkList() {
 
   const displayedArtworkList = filteredArtworkList.slice(startIndex, endIndex);
 
-  function handlePageChange(pageNumber: number) {
-    setCurrentPage(pageNumber);
-  }
-
   return (
     <div>
       <TextField
@@ -64,10 +53,3 @@ export default function ArtworkList() {
     </div>
   );
 }
-// type ArtworkListProps = {
-//   children: React.ReactNode;
-// };
-
-// export default function ArtworkList({ children }: ArtworkListProps) {
-//   return <div>{children}</div>;
-// }

@@ -14,14 +14,12 @@ export default function Root() {
 
 export function NavBar() {
   return (
-    <nav
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        margin: 10,
-        gap: 10,
-      }}
-    >
+    <nav style={{
+      display: "flex",
+      justifyContent: "center",
+      margin: 10,
+      gap: 10,
+    }}>
       <Link to="/">Accueil</Link>
     </nav>
   );

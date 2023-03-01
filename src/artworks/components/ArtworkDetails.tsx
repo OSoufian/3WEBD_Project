@@ -6,10 +6,6 @@ import { ArtworkType } from "../../types";
 import { baseUrl } from "../config";
 import { useParams } from "react-router";
 
-type ArtworkDetailsProps = {
-  objectID: number;
-};
-
 export default function ArtworkDetails() {
   const { objectID } = useParams();
   const [artwork, setArtworkID] = useState<ArtworkType | null>(null);
@@ -39,7 +35,7 @@ export default function ArtworkDetails() {
           <div>
             <div>
               <p>
-                <a href="">Accueil</a> / <a href="">{artwork.department}</a>
+                <a href="/">Accueil</a> / <a href="">{artwork.department}</a>
               </p>
             </div>
             <div>

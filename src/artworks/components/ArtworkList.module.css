@@ -9,7 +9,6 @@
 .museum-list {
   display: flex;
   flex-wrap: wrap;
-  /* padding-left: 2%; */
 }
 
 .pagination {

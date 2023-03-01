@@ -1,5 +1,3 @@
-// import styles from "./ArtworkList.module.css";
-
 import { ArtworkType } from "../../types";
 import Artwork from "./Artwork";
 
