@@ -7,11 +7,11 @@ import { useState } from "react";
 import { TextField } from "@mui/material";
 
 export default function ArtworkList() {
-  const artworkList = useArtworkHighlightListQuery();
+  const { artworksHighlight, isLoading } = useArtworkHighlightListQuery();
   const [input, setInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredArtworkList = artworkList.filter((artwork) => {
+  const filteredArtworkList = artworksHighlight.filter((artwork) => {
     if (input === "") {
       return true;
     } else {
@@ -44,11 +44,15 @@ export default function ArtworkList() {
         placeholder="Rechercher"
         onChange={(event) => setInput(event.target.value)}
       />
-      <div className={styles["museum-list"]}>
-        {displayedArtworkList.map((artwork) => (
-          <Artwork artwork={artwork} key={artwork.objectID} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className={styles["museum-list"]}>
+          {displayedArtworkList.map((artwork) => (
+            <Artwork artwork={artwork} key={artwork.objectID} />
+          ))}
+        </div>
+      )}
       <div className={styles.pagination}>{pageNumbers}</div>
     </div>
   );

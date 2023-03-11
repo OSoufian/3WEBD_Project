@@ -32,9 +32,11 @@ export function useArtworkHighlightListQuery(
   options: { searchText?: string; offset?: number; limit?: number } = {}
 ) {
   const [artworksHighlight, setArtworks] = useState<ArtworkType[]>([]);
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const response = await axios.get(
         `https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&q=sun`
       );
@@ -47,9 +49,10 @@ export function useArtworkHighlightListQuery(
       });
       const artworksHighlight = await Promise.all(promises);
       setArtworks(artworksHighlight.map((artwork) => artwork.data));
+      setIsLoading(false);
     };
     fetchData();
   }, []);
 
-  return artworksHighlight;
+  return { artworksHighlight, isLoading };
 }
