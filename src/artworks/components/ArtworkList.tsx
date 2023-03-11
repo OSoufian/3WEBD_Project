@@ -5,6 +5,7 @@ import Artwork from "./Artwork";
 
 import { useState } from "react";
 import { TextField } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ArtworkList() {
   const { artworksHighlight, isLoading } = useArtworkHighlightListQuery();
@@ -45,7 +46,9 @@ export default function ArtworkList() {
         onChange={(event) => setInput(event.target.value)}
       />
       {isLoading ? (
-        <div>Loading...</div>
+        <div>
+          <CircularProgress />
+        </div>
       ) : (
         <div className={styles["museum-list"]}>
           {displayedArtworkList.map((artwork) => (
