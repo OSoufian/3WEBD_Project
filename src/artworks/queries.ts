@@ -37,7 +37,8 @@ export function useArtworkHighlightListQuery(
     isOnView?: boolean;
     artistOrCulture?: string;
     geoLocation?: string;
-    dimensions?: string;
+    dateBegin?: string;
+    dateEnd?: string;
   } = {}
 ) {
   const [artworksHighlight, setArtworksHighlight] = useState<ArtworkType[]>([]);
@@ -47,12 +48,15 @@ export function useArtworkHighlightListQuery(
     const fetchData = async () => {
       setIsLoading(true);
 
-      let url = "https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&q=s";     
-      
+      let url = "https://collectionapi.metmuseum.org/public/collection/v1/search?q=s"; 
 
       if(options.isOnView !== undefined) {
         url += `&isOnView=${options.isOnView}`;        
-      } 
+      }
+
+      if(options.artistOrCulture !== undefined) {
+        url += `&artistOrCulture=${options.artistOrCulture}`;        
+      }
 
       const response = await axios.get(url);
 
@@ -68,7 +72,7 @@ export function useArtworkHighlightListQuery(
       setIsLoading(false);
     };
     fetchData();
-  }, [options.isOnView]);
+  }, [options.isOnView, options.artistOrCulture]);
 
 
   return { artworksHighlight, isLoading };

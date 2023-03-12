@@ -4,22 +4,30 @@ import { useArtworkHighlightListQuery } from "../queries";
 import Artwork from "./Artwork";
 
 import { ChangeEvent, useState } from "react";
-import { TextField, Checkbox } from "@mui/material";
+import { TextField, Checkbox, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+
 import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ArtworkList() {
+  const [showSearchOptions, setShowSearchOptions] = useState(false);
   const [input, setInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [searchOptions, setSearchOptions] = useState({
+    isHighlight: false,
     hasImages: false,
     isOnView: false,
     artistOrCulture: "",
     geoLocation: "",
-    dimensions: "",
+    dateBegin: "",
+    dateEnd: "",
   });
   const { artworksHighlight, isLoading } = useArtworkHighlightListQuery({
     isOnView: searchOptions.isOnView,
+    hasImages: searchOptions.hasImages,
+    artistOrCulture: searchOptions.artistOrCulture,
   });
+
+  
 
   const filteredArtworkList = artworksHighlight.filter((artwork) => {
     if (input === "") {
@@ -54,26 +62,85 @@ export default function ArtworkList() {
         placeholder="Rechercher"
         onChange={(event) => setInput(event.target.value)}
       />
-      {/* <div>
-        <Checkbox
-          checked={searchOptions.hasImages}
-          name="hasImages"
-        />
-        Contient une image
-      </div> */}
+      <Button onClick={() => setShowSearchOptions(!showSearchOptions)}>Recherche avancée</Button>     
+      <div style={{ display: showSearchOptions ? "block" : "none" }}>
       <div>
-        <Checkbox
-          checked={searchOptions.isOnView}
-          name="isOnView"
+          <Checkbox
+            checked={searchOptions.isOnView}
+            name="isOnView"
+            onChange={(event) =>
+              setSearchOptions((prevOptions) => ({
+                ...prevOptions,
+                isOnView: event.target.checked,
+              }))
+            }
+          />
+          En exposition
+        </div>
+        <div>
+        <TextField
+          label="Artiste ou culture"
+          value={searchOptions.artistOrCulture}
+          name="artistOrCulture"
           onChange={(event) =>
             setSearchOptions((prevOptions) => ({
               ...prevOptions,
-              isOnView: event.target.checked,
+              artistOrCulture: event.target.value,
             }))
           }
         />
-        En exposition
-      </div>
+        </div>
+        <div>
+        {/* <TextField
+          label="Date de début"
+          value={searchOptions.beginDate}
+          name="beginDate"
+          onChange={(event) =>
+            setSearchOptions((prevOptions) => ({
+              ...prevOptions,
+              beginDate: event.target.value,
+            }))
+          }
+        /> */}
+        </div>
+        <div>
+        {/* <TextField
+          label="Date de fin"
+          value={searchOptions.endDate}
+          name="endDate"
+          onChange={(event) =>
+            setSearchOptions((prevOptions) => ({
+              ...prevOptions,
+              endDate: event.target.value,
+            }))
+          }
+        /> */}
+        </div>
+        <div>
+        {/* <FormControl>
+        <InputLabel>Localisation</InputLabel>
+        <Select
+          value={searchOptions.geoLocation}
+          onChange={(event) =>
+            setSearchOptions((prevOptions) => ({
+              ...prevOptions,
+              geoLocation: event.target.value,
+            }))}
+        >
+          <MenuItem value="">
+            <em>Aucun</em>
+          </MenuItem>
+          <MenuItem value="Europe">Europe</MenuItem>
+          <MenuItem value="France">France</MenuItem>
+          <MenuItem value="Paris">Paris</MenuItem>
+          <MenuItem value="China">China</MenuItem>
+          <MenuItem value="New York">New York</MenuItem>
+        </Select>
+      </FormControl> */}
+
+        </div>
+      </div>        
+        
       {isLoading ? (
         <div>
           <CircularProgress />
