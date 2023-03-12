@@ -29,30 +29,47 @@ export function useArtworkListQuery(
 }
 
 export function useArtworkHighlightListQuery(
-  options: { searchText?: string; offset?: number; limit?: number } = {}
+  options: {
+    searchText?: string;
+    offset?: number;
+    limit?: number;
+    hasImages?: boolean;
+    isOnView?: boolean;
+    artistOrCulture?: string;
+    geoLocation?: string;
+    dimensions?: string;
+  } = {}
 ) {
-  const [artworksHighlight, setArtworks] = useState<ArtworkType[]>([]);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [artworksHighlight, setArtworksHighlight] = useState<ArtworkType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const response = await axios.get(
-        `https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&q=sun`
-      );
-      console.log(response.data);
-      const objectIDs = response.data.objectIDs.slice(3,100);
+
+      let url = "https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&q=s";     
+      
+
+      if(options.isOnView !== undefined) {
+        url += `&isOnView=${options.isOnView}`;        
+      } 
+
+      const response = await axios.get(url);
+
+      const objectIDs = response.data.objectIDs.slice(0, 97);
       const promises = objectIDs.map((objectID: number) => {
         return axios.get(
           `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
         );
       });
+
       const artworksHighlight = await Promise.all(promises);
-      setArtworks(artworksHighlight.map((artwork) => artwork.data));
+      setArtworksHighlight(artworksHighlight.map((artwork) => artwork.data));
       setIsLoading(false);
     };
     fetchData();
-  }, []);
+  }, [options.isOnView]);
+
 
   return { artworksHighlight, isLoading };
 }

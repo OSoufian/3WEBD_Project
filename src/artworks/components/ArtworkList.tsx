@@ -3,14 +3,23 @@ import { useArtworkHighlightListQuery } from "../queries";
 
 import Artwork from "./Artwork";
 
-import { useState } from "react";
-import { TextField } from "@mui/material";
+import { ChangeEvent, useState } from "react";
+import { TextField, Checkbox } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ArtworkList() {
-  const { artworksHighlight, isLoading } = useArtworkHighlightListQuery();
   const [input, setInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchOptions, setSearchOptions] = useState({
+    hasImages: false,
+    isOnView: false,
+    artistOrCulture: "",
+    geoLocation: "",
+    dimensions: "",
+  });
+  const { artworksHighlight, isLoading } = useArtworkHighlightListQuery({
+    isOnView: searchOptions.isOnView,
+  });
 
   const filteredArtworkList = artworksHighlight.filter((artwork) => {
     if (input === "") {
@@ -45,6 +54,26 @@ export default function ArtworkList() {
         placeholder="Rechercher"
         onChange={(event) => setInput(event.target.value)}
       />
+      {/* <div>
+        <Checkbox
+          checked={searchOptions.hasImages}
+          name="hasImages"
+        />
+        Contient une image
+      </div> */}
+      <div>
+        <Checkbox
+          checked={searchOptions.isOnView}
+          name="isOnView"
+          onChange={(event) =>
+            setSearchOptions((prevOptions) => ({
+              ...prevOptions,
+              isOnView: event.target.checked,
+            }))
+          }
+        />
+        En exposition
+      </div>
       {isLoading ? (
         <div>
           <CircularProgress />
